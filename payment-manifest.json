@@ -1,6 +1,7 @@
 {
   "default_applications": ["https://keyless.one/manifest.json"],
   "supported_origins": [
+    "https://santalov.github.io/",
     "https://keyless.one",
     "https://robodex.io",
     "https://localhost",
