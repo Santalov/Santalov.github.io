@@ -40,7 +40,7 @@ function check() {
     }
 
     navigator.serviceWorker
-        .getRegistration('app.js')
+        .getRegistration('worker.js')
         .then(registration => {
             if (!registration) {
                 hideElement('checking');
@@ -100,7 +100,7 @@ function install() {
     showElement('installing');
 
     navigator.serviceWorker
-        .register('app.js')
+        .register('worker.js')
         .then(() => {
             return navigator.serviceWorker.ready;
         })
@@ -154,7 +154,7 @@ function uninstall() {
     showElement('uninstalling');
 
     navigator.serviceWorker
-        .getRegistration('app.js')
+        .getRegistration('worker.js')
         .then(registration => {
             registration
                 .unregister()
