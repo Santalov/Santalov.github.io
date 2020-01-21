@@ -185,18 +185,27 @@ check();
 
 
 async function openWindow() {
-    const request = new PaymentRequest([{
-        supportedMethods: 'https://santalov.github.io/empty-worker/',
-    }], {
-        total: {
-            label: 'N/A',
-            amount: {
-                currency: 'USD',
-                value: '0.00'
+    try {
+        document.getElementById('response').innerText = '';
+        document.getElementById('status').innerHTML = 'Opening sender ...';
+        const request = new PaymentRequest([{
+            supportedMethods: 'https://santalov.github.io/empty-worker/',
+        }], {
+            total: {
+                label: 'N/A',
+                amount: {
+                    currency: 'USD',
+                    value: '0.00'
+                }
             }
+        });
+        const response = await request.show();
+        if (response.details) {
+            document.getElementById('response').innerText = JSON.stringify(response.details);
         }
-    });
-    const response = await request.show();
-    console.log(response.details);
-    await response.complete('success');
+        document.getElementById('status').innerHTML = 'Got response from service worker.';
+        await response.complete('success');
+    } catch (e) {
+        document.getElementById('status').innerText = 'Error ' + e.toString();
+    }
 }
