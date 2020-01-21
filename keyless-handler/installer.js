@@ -203,9 +203,16 @@ async function openWindow() {
         if (response.details) {
             document.getElementById('response').innerText = JSON.stringify(response.details);
         }
-        document.getElementById('status').innerHTML = 'Got response from service worker.';
+        document.getElementById('status').innerHTML = 'Response was sent into resolve()';
         await response.complete('success');
     } catch (e) {
         document.getElementById('status').innerText = 'Error ' + e.toString();
     }
+}
+
+function subscribePostMessagesFromWorker() {
+    navigator.serviceWorker.addEventListener('message', function (msg) {
+        document.getElementById('status').innerText = 'Response was sent into postMessage()'
+        document.getElementById('response').innerText = JSON.stringify(msg);
+    });
 }
