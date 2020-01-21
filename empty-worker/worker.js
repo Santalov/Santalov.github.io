@@ -5,7 +5,7 @@ self.addEventListener('message', function (event) {
     if (event.data && self.resolver) {
         self.resolver({
             methodName: 'https://santalov.github.io/empty-worker/',
-            data: event.data,
+            details: event.data,
         });
     } else {
         console.error('service worker received empty data', event);
