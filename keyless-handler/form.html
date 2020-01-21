@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="payment-method-manifest" href="payment-manifest.json">
+    <title>Form</title>
+</head>
+<body>
+<h3>Send</h3>
+<form style="padding: 0 15px">
+    <div>
+        <label for="textarea">The content to be sent:</label>
+    </div>
+    <div style="margin-bottom: 10px">
+        <textarea id="textarea" rows="8" style="display: block; width: 100%"></textarea>
+    </div>
+    <div id="status"></div>
+    <button style="padding: 5px;" onclick="send()" type="button">Send data</button>
+</form>
+</body>
+<script src="form.js"></script>
+</html>

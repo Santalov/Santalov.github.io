@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Empty Worker</title>
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+<div id="contents">
+    <h1>Empty worker</h1>
+    <p>Обмен json-сообщениями с keyless_handler</p>
+
+    <p id="checking">Checking whether the service worker is installed...</p>
+
+    <div id="installed" style="display: none;">
+        <p>The service worker is installed. <a href="../password-test/">Test it
+            out</a>.</p>
+        <ul>
+            <li>Scope: <code id="scope">N/A</code></li>
+            <li>Method: <code id="method">N/A</code></li>
+        </ul>
+        <p><button onclick="uninstall();">Uninstall</button></p>
+        <div style="margin-top: 15px; font-size: 2em">
+            <button onclick="openWindow()" style="padding: 10px">Open Window</button>
+        </div>
+        <h3>Response</h3>
+        <div style="padding: 0 15px">
+            <div>
+                <p>Below you will see the response.</p>
+            </div>
+            <div id="status"></div>
+            <div style="padding: 10px; background-color: #eeeeee" id="response">
+
+            </div>
+        </div>
+    </div>
+
+    <p id="installing" style="display: none;">Installing...</p>
+
+    <p id="uninstalling" style="display: none;">Uninstalling...</p>
+
+    <div id="not-installed" style="display: none;">
+        <p>The service worker is not installed. <a href="../password-test/">Verify</a>.</p>
+        <p><button onclick="install();">Install</button></p>
+    </div>
+
+    <pre id="msg"></pre>
+</div>
+<script src="installer.js"></script>
+</body>
+
+</html>
