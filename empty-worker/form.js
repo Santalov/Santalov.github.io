@@ -4,8 +4,10 @@ function send() {
     console.log('send', msgData);
     document.getElementById('status').innerText = 'sending';
     navigator.serviceWorker.controller.postMessage({
-        data: msgData, resolver: (responseMsg) => {
-            document.getElementById('response').innerText = responseMsg;
-        }
+        data: msgData
     });
 }
+
+navigator.serviceWorker.onmessage = (event) => {
+    document.getElementById('response').innerText = JSON.stringify(event);
+};

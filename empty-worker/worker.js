@@ -3,7 +3,7 @@ self.resolver = null;
 self.addEventListener('message', function (event) {
     console.log('message event', event);
     if (event.data) {
-        event.data.resolver('ok');
+        postMessage(event.data);
     } else {
         console.error('service worker received empty data', event);
     }
