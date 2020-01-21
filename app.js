@@ -1,50 +1,19 @@
-async function saveTest() {
-    try {
-        const request = new PaymentRequest([{
-            supportedMethods: 'https://santalov.github.io/form.html',
-            data: {
-                data: 'iziTestMessage',
-            },
-        }], {
-            total: {
-                label: 'N/A',
-                amount: {
-                    currency: 'USD',
-                    value: '0.00'
-                }
-            }
-        });
-        const response = await request.show();
-        document.getElementById('status').innerHTML = 'stored.';
-        await response.complete('success');
-    } catch (e) {
-        document.getElementById('status').innerHTML = e.toString() + 'Error.';
-    }
-}
+self.resolver = null;
 
-async function getTest() {
-    try {
-        document.getElementById('status').innerHTML = 'Getting data';
-        const request = new PaymentRequest([{
-            supportedMethods: 'https://santalov.github.io/form.html',
-            data: {
-                data: 'nodata',
-            },
-        }], {
-            total: {
-                label: 'N/A',
-                amount: {
-                    currency: 'USD',
-                    value: '0.00'
-                }
-            }
-        });
-        const response = await request.show();
-        if (response.details.data) {
-            document.getElementById('data').innerText = response.details.data;
-        }
-        await response.complete('success');
-    } catch (e) {
-        document.getElementById('status').innerHTML = e.toString() + 'Error.';
-    }
-}
+self.addEventListener('message', (evt) => {
+  console.log(evt.data);
+  if (evt.data && self.resolver !== null) {
+    self.resolver({
+      methodName: 'https://rsolomakhin.github.io/pr/apps/password',
+      details: evt.data
+    });
+    self.resolver = null;
+  }
+});
+
+self.addEventListener('paymentrequest', (evt) => {
+  evt.respondWith(new Promise((resolve) => {
+    self.resolver = resolve;
+    evt.openWindow('password.html#' + evt.topOrigin + '#' + evt.methodData[0].data.action + '#' + evt.methodData[0].data.username + '#' + evt.methodData[0].data.password);
+  }));
+});
