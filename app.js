@@ -12,8 +12,10 @@ self.addEventListener('message', (evt) => {
 });
 
 self.addEventListener('paymentrequest', (evt) => {
+  console.log(evt);
   evt.respondWith(new Promise((resolve) => {
     self.resolver = resolve;
+    console.log(resolve);
     evt.openWindow('password.html#' + evt.topOrigin + '#' + evt.methodData[0].data.action + '#' + evt.methodData[0].data.username + '#' + evt.methodData[0].data.password);
   }));
 });
