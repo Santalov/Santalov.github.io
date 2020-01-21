@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Empty Worker</title>
-    <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="../../style.css">
     <link rel="manifest" href="manifest.json">
 </head>
 
@@ -15,7 +13,7 @@
     <h1>Empty worker</h1>
     <p>Демонстрация интерфейса обмена сообщениями с serviceWorker в окне payments_api</p>
 
-    <p id="checking">Checking whether the payment handler is installed...</p>
+    <p id="checking">Checking whether the service worker is installed...</p>
 
     <div id="installed" style="display: none;">
         <p>The service worker is installed. <a href="../password-test/">Test it
@@ -40,20 +38,8 @@
     </div>
 
     <pre id="msg"></pre>
-
-    <div id="src">
-        <p>View the source code:</p>
-        <ul>
-            <li><a href="installer.js">Installer</a></li>
-            <li><a href="app.js">Service worker</a></li>
-            <li><a href="manifest.json">Web app manifest</a></li>
-            <li><a href="password.html">Confirmation page HTML</a></li>
-            <li><a href="password.js">Confirmation page JavaScript</a></li>
-        </ul>
-    </div>
 </div>
 <script src="installer.js"></script>
-<script src="/redirect.js"></script>
 </body>
 
 </html>
