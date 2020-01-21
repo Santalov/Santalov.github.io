@@ -1,7 +1,7 @@
 self.resolver = null;
 
 self.addEventListener('message', (evt) => {
-  console.log(evt.data);
+  console.log(evt);
   if (evt.data && self.resolver !== null) {
     self.resolver({
       methodName: 'https://santalov.github.io/',
