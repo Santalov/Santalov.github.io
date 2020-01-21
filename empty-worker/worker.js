@@ -11,6 +11,6 @@ self.addEventListener('paymentrequest', (evt) => {
     console.log(evt);
     evt.respondWith(new Promise((resolve) => {
         console.log('resolve', resolve);
-        evt.openWindow('/form/index.html');
+        evt.openWindow('form.html');
     }));
 });
