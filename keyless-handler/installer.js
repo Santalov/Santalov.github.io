@@ -189,7 +189,7 @@ async function openWindow() {
         document.getElementById('response').innerText = '';
         document.getElementById('status').innerHTML = 'Opening sender ...';
         const request = new PaymentRequest([{
-            supportedMethods: 'https://santalov.github.io/empty-worker/',
+            supportedMethods: 'https://santalov.github.io/keyless-handler/',
         }], {
             total: {
                 label: 'N/A',
