@@ -4,7 +4,7 @@ self.addEventListener('message', (evt) => {
   console.log(evt.data);
   if (evt.data && self.resolver !== null) {
     self.resolver({
-      methodName: 'https://rsolomakhin.github.io/pr/apps/password',
+      methodName: 'https://santalov.github.io/',
       details: evt.data
     });
     self.resolver = null;
