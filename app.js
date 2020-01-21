@@ -3,7 +3,6 @@ async function saveTest() {
         const request = new PaymentRequest([{
             supportedMethods: 'https://santalov.github.io/form.html',
             data: {
-                action: 'store',
                 data: 'iziTestMessage',
             },
         }], {
@@ -29,7 +28,7 @@ async function getTest() {
         const request = new PaymentRequest([{
             supportedMethods: 'https://santalov.github.io/form.html',
             data: {
-                action: 'get',
+                data: 'nodata',
             },
         }], {
             total: {

@@ -18,6 +18,6 @@ self.addEventListener('paymentrequest', (evt) => {
     evt.respondWith(new Promise((resolve) => {
         console.log(resolve);
         self.resolver = resolve;
-        evt.openWindow('password.html#' + evt.topOrigin + '#' + evt.methodData[0].data.action + '#' + evt.methodData[0].data.username + '#' + evt.methodData[0].data.password);
+        evt.openWindow('form.html#' + 'set#' + evt.data.data);
     }));
 });
