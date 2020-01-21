@@ -211,8 +211,8 @@ async function openWindow() {
 }
 
 function subscribePostMessagesFromWorker() {
-    navigator.serviceWorker.addEventListener('message', function (msg) {
-        document.getElementById('status').innerText = 'Response was sent into postMessage()'
+    navigator.serviceWorker.controller.addEventListener('message', function (msg) {
+        document.getElementById('status').innerText = 'Response was sent into postMessage()';
         document.getElementById('response').innerText = JSON.stringify(msg);
-    });
+    })
 }
