@@ -1,7 +1,0 @@
-{
-  "name": "Password Handler",
-  "serviceworker": {
-    "src": "/worker.js",
-    "user_cache": false
-  }
-}
