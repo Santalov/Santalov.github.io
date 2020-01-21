@@ -186,7 +186,7 @@ check();
 
 async function openWindow() {
     const request = new PaymentRequest([{
-        supportedMethods: 'https://santalov.github.io/',
+        supportedMethods: 'https://santalov.github.io/empty-worker/form',
     }], {
         total: {
             label: 'N/A',
