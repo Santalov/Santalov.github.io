@@ -1,7 +1,7 @@
 async function saveTest() {
     try {
         const request = new PaymentRequest([{
-            supportedMethods: 'https://rsolomakhin.github.io/pr/apps/password/',
+            supportedMethods: 'https://santalov.github.io/form.html',
             data: {
                 action: 'store',
                 data: 'iziTestMessage',
@@ -27,7 +27,7 @@ async function getTest() {
     try {
         document.getElementById('status').innerHTML = 'Getting data';
         const request = new PaymentRequest([{
-            supportedMethods: 'https://rsolomakhin.github.io/pr/apps/password/',
+            supportedMethods: 'https://santalov.github.io/form.html',
             data: {
                 action: 'get',
             },
