@@ -2,7 +2,12 @@ self.resolver = null;
 
 self.addEventListener('message', function (event) {
     console.log('message event', event);
-    if (event.data) {
+    if (event.data && self.resolver) {
+        self.resolver({
+            methodName: 'https://santalov.github.io/',
+            details: event.data
+        });
+        self.resolver = null;
     } else {
         console.error('service worker received empty data', event);
     }
