@@ -25,7 +25,7 @@ navigator.serviceWorker
                 registration.paymentManager.instruments
                     .get('instrument-key')
                     .then(instrument => {
-                        console.log('service worker installed', 'scope', );
+                        console.log('service worker installed', 'scope', registration.scope, 'method', instrument.method);
                     })
                     .catch(error => {
                         alert(error);
