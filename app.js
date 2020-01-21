@@ -15,7 +15,7 @@ async function saveTest() {
             }
         });
         const response = await request.show();
-        document.getElementById('status').innerHTML = 'Username and password stored.';
+        document.getElementById('status').innerHTML = 'stored.';
         await response.complete('success');
     } catch (e) {
         document.getElementById('status').innerHTML = e.toString() + 'Error.';
