@@ -1,4 +1,5 @@
 self.addEventListener('message', function (event) {
+    console.log('message event', event);
     if (event.data) {
 
     } else {
