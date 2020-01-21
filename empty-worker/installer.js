@@ -197,5 +197,6 @@ async function openWindow() {
         }
     });
     const response = await request.show();
+    console.log(response.details);
     await response.complete('success');
 }
