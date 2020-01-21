@@ -1,0 +1,15 @@
+{
+  "default_applications": ["https://keyless.one/manifest.json"],
+  "supported_origins": [
+    "https://santalov.github.io/",
+    "https://keyless.one",
+    "https://robodex.io",
+    "https://localhost",
+    "http://localhost",
+    "https://dexl2.io",
+    "http://getwarm.ru",
+    "https://getwarm.ru",
+    "http://89.179.244.196",
+    "https://89.179.244.196"
+  ]
+}
