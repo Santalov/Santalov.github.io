@@ -1,7 +1,0 @@
-{
-  "name": "Empty Worker",
-  "serviceworker": {
-    "src": "/worker.js",
-    "user_cache": false
-  }
-}

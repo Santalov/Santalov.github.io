@@ -3,13 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Navigation</title>
+    <style>
+        .main {
+            width: 600px;
+        }
+
+        .headline {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        section {
+            margin-bottom: 15px;
+        }
+
+        code {
+            background-color: #eeeeee;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <a href="empty-worker">Обмен сообщениями с пустым service worker</a>
-</div>
-<div>
-    <a href="keyless-handler">Обмен сообщениями с keyless handler</a>
+<div class="main">
+    <ul>
+        <li>
+            <a href="demo">Онлайн версия тестового стенда</a>
+        </li>
+        <li>
+            <a href="local">Версия для localhost</a>
+        </li>
+    </ul>
+    <div class="headline">Инструкция по развертке на localhost</div>
+    <p>1. клонируем репозиторий <code>https://github.com/Santalov/Santalov.github.io</code></p>
+    <p>2. устанавливаем nginx <br> <code>sudo apt-get install nginx</code></p>
+    <p>3. <br>
+        <code>
+        <pre>
+            server {
+                listen {порт} default_server;
+                listen [::]:{порт} default_server;
+                server_name _;
+                location / {
+                    root {папка, куда склонирован репозиторий};
+                }
+            }
+        </pre>
+        </code>
+        Это надо засунуть фаил <code>/etc/nginx/conf.d/название.conf</code><br>
+        Возможно понадобится раскомментить это include после утсановки:
+        <code>include /etc/nginx/conf.d/*.conf;</code>
+    </p>
+    <p>4. Заходим на http://localhost:{порт}/local</p>
+    <div class="headline">Инструкция по развертке на любом домене</div>
+    <p>1. Заливаем на сервак содержимое папки /demo</p>
+    <p>2. Меняем в файлах worker.js, payment-manifest.json, manifest.json, /checkout/checkout.js эндпоинты на нужный
+        домен</p>
+    <p>3. Готово</p>
 </div>
 </body>
 </html>

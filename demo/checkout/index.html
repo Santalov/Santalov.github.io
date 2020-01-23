@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Popup for sending messages into service worker</title>
+    <style>
+        .main {
+            width: 600px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .headline {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .button {
+            padding: 8px;
+        }
+
+        .result {
+            background-color: #eeeeee;
+            padding: 10px;
+        }
+
+        .textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+        .textarea {
+
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="headline">
+        Service worker получит это сообщение в обработчик события message.
+    </div>
+    <textarea rows="8" class="textarea" id="textarea" placeholder="сообщение"></textarea>
+    <button class="button" onclick="send()">Отправить</button>
+    <div>
+        <p>Ответ от service worker на первое сообщение:</p>
+        <div class="result" id="response"></div>
+    </div>
+</div>
+</body>
+<script src="checkout.js"></script>
+</html>

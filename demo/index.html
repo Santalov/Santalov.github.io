@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <title>Тестовый стенд</title>
+    <style>
+        .main {
+            width: 600px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .headline {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .button {
+            padding: 8px;
+        }
+
+        section {
+            margin-bottom: 15px;
+        }
+
+        .result {
+            background-color: #eeeeee;
+            padding: 10px;
+        }
+
+        .textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        #postMessageReload {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div id="checking">
+        Проверяем, установлен ли service worker ...
+    </div>
+    <div id="not-installed">
+        <div class="headline">Service worker не установлен</div>
+        <button class="button" onclick="installServiceWorker()">Установить</button>
+    </div>
+    <div id="installing">
+        Установка ...
+    </div>
+    <div id="uninstalling">
+        Удаление ...
+    </div>
+    <div id="installed">
+        <section>
+            <div class="headline">Service worker установлен</div>
+            <ul>
+                <li>Scope: <code id="scope">неизвестно</code></li>
+                <li>Method: <code id="method">неизвестно</code></li>
+            </ul>
+            <button class="button" onclick="uninstallServiceWorker()">Удалить</button>
+        </section>
+        <section>
+            <div class="headline">Отправка сообщений через диалог web payments api</div>
+            <p>В service Worker сообщение придет в обработчик события paymentrequest в поле data в виде строки, откуда будет передано в диалог. В
+                диалоге можно ввести другое сообщение, которое также будет передано в service worker в обработчки события message.
+            </p>
+            <textarea rows="8" placeholder="сообщение" id="paymentsMessage" class="textarea"></textarea>
+            <button class="button" onclick="openWindow()">Открыть окно</button>
+            <div id="paymentsStatus"></div>
+            <p>Здесь будет ответ от service worker на сообщение из диалога.</p>
+            <div class="result" id="paymentsResponse"></div>
+        </section>
+        <section>
+            <div class="headline">Отправка сообщений через postMessage()</div>
+            <p>В service Worker сообщение придет в обработчик события message в виде строки в поле data.</p>
+            <textarea rows="8" placeholder="сообщение" id="postMessage" class="textarea"></textarea>
+            <div class="headline" id="postMessageReload">Перезагрузите страницу, serviceWorker.controller недоступен</div>
+            <button class="button" onclick="sendMessage()">Отправить</button>
+            <div id="postStatus"></div>
+            <p>Здесь будет ответ на сообщение.</p>
+            <div class="result" id="postResponse"></div>
+        </section>
+    </div>
+    <div id="statusService">
+    </div>
+</div>
+</body>
+<script src="installer.js"></script>
+<script src="interaction.js"></script>
+</html>
