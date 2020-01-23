@@ -38,14 +38,14 @@
     <p>3. <br>
         <code>
         <pre>
-            server {
-                listen {порт} default_server;
-                listen [::]:{порт} default_server;
-                server_name _;
-                location / {
-                    root {папка, куда склонирован репозиторий};
-                }
-            }
+server {
+    listen {порт} default_server;
+    listen [::]:{порт} default_server;
+    server_name _;
+    location / {
+        root {папка, куда склонирован репозиторий};
+   }
+}
         </pre>
         </code>
         Это надо засунуть фаил <code>/etc/nginx/conf.d/название.conf</code><br>
