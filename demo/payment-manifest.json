@@ -1,5 +1,5 @@
 {
-  "default_applications": ["http://localhost:9001/demo/manifest.json"],
+  "default_applications": ["https://santalov.github.io/demo/manifest.json"],
   "supported_origins": [
     "*"
   ]

@@ -1,4 +1,4 @@
-const origin = 'http://localhost:9001/demo';
+const origin = 'https://santalov.github.io/demo';
 const methodName = origin + '/checkout';
 
 let client;
