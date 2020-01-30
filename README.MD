@@ -13,16 +13,16 @@
 
 #### Фаилы
 
-+checkout/* - то, что отображается внутри диалога - копия фаилов из папки 
++ checkout/* - то, что отображается внутри диалога - копия фаилов из папки 
 imgui/examples/form2, но фаил example_emscripten.html переименован в index.js
-+icon.png - не имеет отношения к функционалу, обязателен (на самом деле нет) 
++ icon.png - не имеет отношения к функционалу, обязателен (на самом деле нет) 
 для web payments api
-+index.html - визуал установки service worker и открытия диалога
-+installer.js - проверка, установлен ли service worker и установка и удаление.
-+interaction.js - открытие окна (вызов web payments api)
-+worker.js - сам service worker, открывает окно
-+manifest.json - служебный фаил с инфой для браузера
-+payment-manifest.json - служебный фаил с инфой для браузера
++ index.html - визуал установки service worker и открытия диалога
++ installer.js - проверка, установлен ли service worker и установка и удаление
++ interaction.js - открытие окна (вызов web payments api)
++ worker.js - сам service worker, открывает окно
++ manifest.json - служебный фаил с инфой для браузера
++ payment-manifest.json - служебный фаил с инфой для браузера
 
 ## Demo и local
 
@@ -30,13 +30,13 @@ imgui/examples/form2, но фаил example_emscripten.html переименов
 
 #### Файлы
 
-+checkout/index.html - форма и кнопка для отправки сообщения внутри диалога
-+checkout/checkout.js - общение с service worker внутри диалога
-+icon.png - не имеет отношения к функционалу, обязателен (на самом деле нет) 
++ checkout/index.html - форма и кнопка для отправки сообщения внутри диалога
++ checkout/checkout.js - общение с service worker внутри диалога
++ icon.png - не имеет отношения к функционалу, обязателен (на самом деле нет) 
 для web payments api
-+index.html - визуал установки service worker, отправки сообщения и открытия диалога
-+installer.js - проверка, установлен ли service worker и установка и удаление.
-+interaction.js - открытие окна (вызов web payments api), отправка сообщений в service worker и получение ответ.
-+worker.js - сам service worker, открывает окно, обрабатывает сообщения и paymentsapirequest.
-+manifest.json - служебный фаил с инфой для браузера.
-+payment-manifest.json - служебный фаил с инфой для браузера.
++ index.html - визуал установки service worker, отправки сообщения и открытия диалога
++ installer.js - проверка, установлен ли service worker и установка и удаление.
++ interaction.js - открытие окна (вызов web payments api), отправка сообщений в service worker и получение ответ.
++ worker.js - сам service worker, открывает окно, обрабатывает сообщения и paymentsapirequest.
++ manifest.json - служебный фаил с инфой для браузера.
++ payment-manifest.json - служебный фаил с инфой для браузера
