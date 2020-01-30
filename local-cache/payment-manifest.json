@@ -1,0 +1,6 @@
+{
+  "default_applications": ["http://localhost:9001/local-cache/manifest.json"],
+  "supported_origins": [
+    "*"
+  ]
+}
