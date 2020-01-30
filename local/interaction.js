@@ -1,15 +1,17 @@
 let client; // наличие client также свидетельствует об активной подписке
 
 function subscribeMessages() {
-    navigator.serviceWorker.addEventListener('message', e => {
-        console.log('got response message', e);
-        if (client) {
-            View.postResponse().innerText = e.data;
-        }
-        client = e.source;
-    });
-    navigator.serviceWorker.controller.postMessage('installer_page_ready_for_interaction')
-    console.log('subscribed');
+    if (!client) {
+        console.log('subscribing');
+        navigator.serviceWorker.addEventListener('message', e => {
+            console.log('got response message', e);
+            if (client) {
+                View.postResponse().innerText = e.data;
+            }
+            client = e.source;
+        });
+        navigator.serviceWorker.controller.postMessage('installer_page_ready_for_interaction')
+    }
 }
 
 function sendMessage() {

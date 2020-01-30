@@ -74,14 +74,17 @@ const urlsToCache = [
 ];
 
 self.addEventListener('install', evt => {
-    // Perform install steps
     evt
         .waitUntil(
             caches
-                .open(CACHE_NAME)
-                .then(function (cache) {
-                    console.log('Opened cache');
-                    return cache.addAll(urlsToCache);
+                .delete(CACHE_NAME)
+                .then(() => {
+                    caches
+                        .open(CACHE_NAME)
+                        .then(function (cache) {
+                            console.log('Opened cache');
+                            return cache.addAll(urlsToCache);
+                        })
                 })
         );
 });
