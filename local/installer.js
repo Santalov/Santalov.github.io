@@ -129,31 +129,42 @@ function installServiceWorker() {
     }
     navigator.serviceWorker
         .register('worker.js')
-        .then(registration => {
-            if (!Check.paymentManager(registration, 'installing')) {
+        .then(preRegistration => {
+            console.log('1');
+            if (!Check.paymentManager(preRegistration, 'installing')) {
                 return;
             }
-            if (!Check.instruments(registration, 'installing')) {
+            if (!Check.instruments(preRegistration, 'installing')) {
                 return;
             }
-            registration.paymentManager.instruments
-                .set(
-                    'demo',
-                    {
-                        name: 'Google guide',
-                        method: window.location + '/checkout'
-                    }
-                )
-                .then(() => {
+            console.log('2');
+            navigator.serviceWorker.ready
+                .then(registration => {
                     registration.paymentManager.instruments
-                        .get('instrument-key')
-                        .then(instrument => {
-                            View.get('scope').innerText = registration.scope;
-                            if (instrument) {
-                                View.get('method').innerText = instrument.method;
+                        .set(
+                            'demo',
+                            {
+                                name: 'Google guide',
+                                method: window.location.href + 'checkout'
                             }
-                            View.hide('installing');
-                            View.show('installed');
+                        )
+                        .then(() => {
+                            console.log('3');
+                            registration.paymentManager.instruments
+                                .get('instrument-key')
+                                .then(instrument => {
+                                    console.log('4');
+                                    View.get('scope').innerText = registration.scope;
+                                    if (instrument) {
+                                        View.get('method').innerText = instrument.method;
+                                    }
+                                    View.hide('installing');
+                                    View.show('installed');
+                                })
+                                .catch(err => {
+                                    View.hide('installing');
+                                    View.showStatus(err);
+                                });
                         })
                         .catch(err => {
                             View.hide('installing');

@@ -41,7 +41,7 @@ function openWindow() {
         const msg = View.paymentsMessage().value;
         View.paymentsMessage().value = '';
         const request = new PaymentRequest([{
-            supportedMethods: window.location + '/checkout',
+            supportedMethods: window.location.href + 'checkout',
             data: {
                 data: msg
             }
