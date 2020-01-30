@@ -66,3 +66,43 @@ const sendPaymentRequest = (evt) => {
     // это идет отправка сообщения внутрь диалога. Сообщение хранится в methodData[0].data.data в виде строки
     evt.source.postMessage(paymentRequestEvent.methodData);
 };
+
+const CACHE_NAME = 'checkout-cache-v1';
+const urlsToCache = [
+    'checkout/',
+    'checkout/checkout.js',
+];
+
+self.addEventListener('install', evt => {
+    evt
+        .waitUntil(
+            caches
+                .delete(CACHE_NAME)
+                .then(() => {
+                    caches
+                        .open(CACHE_NAME)
+                        .then(function (cache) {
+                            console.log('Opened cache');
+                            return cache.addAll(urlsToCache);
+                        })
+                })
+        );
+});
+
+self.addEventListener('fetch', evt => {
+    console.log('fetch', evt.request);
+    evt
+        .respondWith(
+            caches
+                .match(evt.request)
+                .then(response => {
+                        if (response) {
+                            console.log('from cache', evt.request);
+                            return response;
+                        }
+                        console.log('fetching', evt.request);
+                        return fetch(evt.request);
+                    }
+                )
+        );
+});
