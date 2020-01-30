@@ -1,4 +1,4 @@
-const origin = 'http://localhost:9001/emscripten-demo';
+const origin = 'https://santalov.github.io/emscripten-demo';
 const checkoutUrl = origin + '/checkout';
 
 let resolver;

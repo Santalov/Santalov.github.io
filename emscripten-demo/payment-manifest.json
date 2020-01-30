@@ -1,5 +1,5 @@
 {
-  "default_applications": ["http://localhost:9001/emscripten-demo/manifest.json"],
+  "default_applications": ["https://santalov.github.io/emscripten-demo/manifest.json"],
   "supported_origins": [
     "*"
   ]

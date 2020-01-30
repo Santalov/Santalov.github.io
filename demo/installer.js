@@ -130,30 +130,28 @@ function installServiceWorker() {
     navigator.serviceWorker
         .register('worker.js')
         .then(preRegistration => {
-            console.log('1');
+
             if (!Check.paymentManager(preRegistration, 'installing')) {
                 return;
             }
             if (!Check.instruments(preRegistration, 'installing')) {
                 return;
             }
-            console.log('2');
             navigator.serviceWorker.ready
                 .then(registration => {
                     registration.paymentManager.instruments
                         .set(
                             'demo',
                             {
-                                name: 'Google guide',
+                                name: 'Service Worker Demo',
                                 method: window.location.href + 'checkout'
                             }
                         )
                         .then(() => {
-                            console.log('3');
+
                             registration.paymentManager.instruments
                                 .get('instrument-key')
                                 .then(instrument => {
-                                    console.log('4');
                                     View.get('scope').innerText = registration.scope;
                                     if (instrument) {
                                         View.get('method').innerText = instrument.method;
