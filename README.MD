@@ -28,7 +28,7 @@ imgui/examples/form2, но фаил example_emscripten.html переименов
 
 Тестовый стенд для общения с service worker через сообщения (postMessage) и web payments api.
 
-#### Файлы
+#### Фаилы
 
 + checkout/index.html - форма и кнопка для отправки сообщения внутри диалога
 + checkout/checkout.js - общение с service worker внутри диалога
