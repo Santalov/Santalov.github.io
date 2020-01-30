@@ -13,28 +13,8 @@ class View {
         View.get(id).style.display = 'none';
     }
 
-    static paymentsMessage() {
-        return View.get('paymentsMessage');
-    }
-
-    static paymentsResponse() {
-        return View.get('paymentsResponse');
-    }
-
     static paymentsStatus() {
         return View.get('paymentsStatus');
-    }
-
-    static postMessage() {
-        return View.get('postMessage');
-    }
-
-    static postResponse() {
-        return View.get('postResponse');
-    }
-
-    static postStatus() {
-        return View.get('postStatus');
     }
 
     static status() {
@@ -61,12 +41,7 @@ class View {
     }
 
     static clearInteractionFields() {
-        View.paymentsMessage().value = '';
-        View.paymentsResponse().innerText = '';
         View.paymentsStatus().innerText = '';
-        View.postMessage().value = '';
-        View.postResponse().innerText = '';
-        View.postStatus().innerText = '';
     }
 }
 
