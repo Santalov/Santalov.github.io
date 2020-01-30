@@ -1,0 +1,16 @@
+{
+  "name": "Service Worker Demo",
+  "description": "Made according to developers.google.com. Used for testing.",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "480x453",
+      "type": "image/png"
+    }
+  ],
+  "serviceworker": {
+    "src": "worker.js",
+    "scope": "/",
+    "use_cache": false
+  }
+}

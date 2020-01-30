@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="manifest.json">
+    <title>Тестовый стенд</title>
+    <style>
+        .main {
+            width: 600px;
+            font-family: Helvetica, Arial, sans-serif;
+        }
+
+        .headline {
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .button {
+            padding: 8px;
+        }
+
+        section {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div id="checking">
+        Проверяем, установлен ли service worker ...
+    </div>
+    <div id="not-installed">
+        <div class="headline">Service worker не установлен</div>
+        <button class="button" onclick="installServiceWorker()">Установить</button>
+    </div>
+    <div id="installing">
+        Установка ...
+    </div>
+    <div id="uninstalling">
+        Удаление ...
+    </div>
+    <div id="installed">
+        <section>
+            <div class="headline">Service worker установлен</div>
+            <ul>
+                <li>Scope: <code id="scope">неизвестно</code></li>
+                <li>Method: <code id="method">неизвестно</code></li>
+            </ul>
+            <button class="button" onclick="uninstallServiceWorker()">Удалить</button>
+        </section>
+        <section>
+            <button class="button" onclick="openWindow()">Открыть окно</button>
+            <div id="paymentsStatus"></div>
+        </section>
+    </div>
+    <div id="statusService">
+    </div>
+</div>
+</body>
+<script src="installer.js"></script>
+<script src="interaction.js"></script>
+</html>
