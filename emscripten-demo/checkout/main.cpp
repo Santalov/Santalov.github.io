@@ -14,15 +14,18 @@
 SDL_Window *g_Window = NULL;
 SDL_GLContext g_GLContext = NULL;
 ImFont *bold;
+ImFont *font;
 static int disabled = 0;
 char buf[256];
 char buf2[256];
-int rand__ ;
+int rand__;
 extern void testExternalJSMethod();
+int height;
+int width;
 
 extern "C"
 {
-    extern void my_js();
+    extern void my_js(char *);
 }
 
 static bool InputTextWithPH(const char *placeholder, const char *text, char *buf, size_t buf_size, ImGuiInputTextFlags flags = 0, ImGuiInputTextCallback callback = (ImGuiInputTextCallback)0, void *user_data = (void *)0)
@@ -46,9 +49,17 @@ static bool InputTextWithPH(const char *placeholder, const char *text, char *buf
 
 void main_loop(void *arg)
 {
-    
-    
+
     ImGuiIO &io = ImGui::GetIO();
+
+    height = EM_ASM_INT({
+        return window.outerHeight;
+    });
+
+    width = EM_ASM_INT({
+        return window.outerWidth;
+    });
+
     IM_UNUSED(arg); // We can pass this argument as the second parameter of emscripten_set_main_loop_arg(), but we don't use that.
 
     ImGuiStyle &style = ImGui::GetStyle();
@@ -105,59 +116,45 @@ void main_loop(void *arg)
 
     ImGui::NewFrame();
     {
-        
         static int counter = 0;
 
-        ImGui::SetNextWindowPos(ImVec2(300, 150));
-        ImGui::SetNextWindowSize(ImVec2(400, 250), ImGuiCond_FirstUseEver);
+        ImGui::SetNextWindowPos(ImVec2(0, 0));
+        ImGui::SetNextWindowSize(ImVec2(width, height));
 
-        ImGui::Begin("Password ", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoMove);
+        ImGui::Begin("Password ", NULL, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
         ImGui::PushFont(bold);
         ImGui::Text("Password");
         ImGui::PopFont();
+
         ImGui::NewLine();
         ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 1.0f);
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.5f - 25);
+
+        ImGui::PushFont(font);
         InputTextWithPH("Enter password       ", "    ", buf, sizeof(buf));
-        ImGui::SameLine(170, 20);
-        InputTextWithPH("and repeat", "", buf2, sizeof(buf2));
+
+        ImGui::PopFont();
+
         ImGui::PopStyleVar();
         ImGui::PopItemWidth();
 
-        ImGui::PushFont(bold);
-        ImGui::Text("Randomness");
-        ImGui::PopFont();
-
-        for (int i = 0; i < 9; i++)
+        ImGui::NewLine();
+        if (ImGui::Button("Save", ImVec2(height * 0.14, height * 0.1)))
         {
-            
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV( i / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV( i / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV( i / 7.0f, 0.6f, 0.6f));
 
-            if (ImGui::Button("", ImVec2(28, 32)))
+            if (strlen(buf) >= 8)
             {
+
+                ImGui::OpenPopup("Success");
+                my_js(buf);
             }
 
-            ImGui::SameLine();
-            ImGui::PopStyleColor(3);
-        }
-
-        if (ImGui::Button("Next", ImVec2(50, 34)))
-        {
-            srand(time(NULL));
-            rand__ = 1 + rand() %255;
-        }
-
-        // if (disabled == 0)
-        // {
-        //     ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
-        //     ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
-        // }
-        ImGui::NewLine();
-        if (ImGui::Button("Save", ImVec2(70, 50)))
-        {
+            if (strlen(buf) < 8)
+            {
+                ImGui::OpenPopup("Error");
+                memset(buf, 0, strlen(buf));
+            }
         }
 
         if (ImGui::BeginPopupModal("Error", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
@@ -170,11 +167,15 @@ void main_loop(void *arg)
             ImGui::EndPopup();
         }
 
-        // if (disabled == 1)
-        // {
-        //     ImGui::PopItemFlag();
-        //     ImGui::PopStyleVar();
-        // }
+        if (ImGui::BeginPopupModal("Success", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
+        {
+            ImGui::Text("Success!!");
+            if (ImGui::Button("OK"))
+            {
+                ImGui::CloseCurrentPopup();
+            }
+            ImGui::EndPopup();
+        }
 
         ImGui::End();
     }
@@ -199,7 +200,7 @@ int main(int, char **)
     }
 
     srand(time(NULL));
-    rand__ = 1 + rand() %255;
+    rand__ = 1 + rand() % 255;
 
     const char *glsl_version = "#version 100";
     // const char* glsl_version = "#version 300 es";
@@ -232,6 +233,14 @@ int main(int, char **)
 
     ImGui::StyleColorsClassic();
 
+    height = EM_ASM_INT({
+        return window.outerHeight;
+    });
+
+    width = EM_ASM_INT({
+        return window.outerWidth;
+    });
+
     // Setup Platform/Renderer bindings
     ImGui_ImplSDL2_InitForOpenGL(g_Window, g_GLContext);
     ImGui_ImplOpenGL3_Init(glsl_version);
@@ -239,10 +248,11 @@ int main(int, char **)
     // io.Fonts->AddFontDefault();
 
     // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-    ImFont *font = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Medium.ttf", 16.0f);
-    IM_ASSERT(font != NULL);
-    bold = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Black.ttf", 18.0f);
+    bold = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Black.ttf", height * 0.05);
     IM_ASSERT(bold != NULL);
+
+    font = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Medium.ttf", height * 0.03);
+    IM_ASSERT(font != NULL);
 
     emscripten_set_main_loop_arg(main_loop, NULL, 0, true);
 }

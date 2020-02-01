@@ -58,7 +58,7 @@ all: $(EXE)
 	@echo Build complete for $(EXE)
 
 $(EXE): $(OBJS)
-	$(CXX) --preload-file fonts -o $@ $^ $(LIBS) $(LDFLAGS)
+	$(CXX) --preload-file fonts --js-library lib.js -o $@ $^ $(LIBS) $(LDFLAGS)
 
 clean:
 	rm -f $(EXE) $(OBJS) *.js *.wasm *.wasm.pre
