@@ -53,11 +53,11 @@ void main_loop(void *arg)
     ImGuiIO &io = ImGui::GetIO();
 
     height = EM_ASM_INT({
-        return window.outerHeight;
+        return window.innerHeight;
     });
 
     width = EM_ASM_INT({
-        return window.outerWidth;
+        return window.innerWidth;
     });
 
     IM_UNUSED(arg); // We can pass this argument as the second parameter of emscripten_set_main_loop_arg(), but we don't use that.
@@ -140,7 +140,7 @@ void main_loop(void *arg)
         ImGui::PopItemWidth();
 
         ImGui::NewLine();
-        if (ImGui::Button("Save", ImVec2(height * 0.14, height * 0.1)))
+        if (ImGui::Button("Save", ImVec2(height * 0.28, height * 0.2)))
         {
 
             if (strlen(buf) >= 8)
@@ -157,19 +157,27 @@ void main_loop(void *arg)
             }
         }
 
-        if (ImGui::BeginPopupModal("Error", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
+        ImGui::SetNextWindowPos(ImVec2(width * 0.15, height * 0.375));
+        ImGui::SetNextWindowSize(ImVec2(width * 0.7, height / 4));
+        if (ImGui::BeginPopupModal("Error", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse))
         {
-            ImGui::Text("Password should be at least 8 characters long");
+            ImGui::PushFont(font);
+            ImGui::Text("Password should be 8+ characters");
+            ImGui::PopFont();
             if (ImGui::Button("OK"))
             {
                 ImGui::CloseCurrentPopup();
             }
             ImGui::EndPopup();
         }
+        ImGui::SetNextWindowPos(ImVec2(width * 0.35, height  * 0.375));
+        ImGui::SetNextWindowSize(ImVec2(width * 0.3, height / 4));
 
-        if (ImGui::BeginPopupModal("Success", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
+        if (ImGui::BeginPopupModal("Success", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse))
         {
+            ImGui::PushFont(font);
             ImGui::Text("Success!!");
+            ImGui::PopFont();
             if (ImGui::Button("OK"))
             {
                 ImGui::CloseCurrentPopup();
@@ -234,11 +242,11 @@ int main(int, char **)
     ImGui::StyleColorsClassic();
 
     height = EM_ASM_INT({
-        return window.outerHeight;
+        return window.innerHeight -10;
     });
 
     width = EM_ASM_INT({
-        return window.outerWidth;
+        return window.innerWidth -10;
     });
 
     // Setup Platform/Renderer bindings
@@ -248,10 +256,10 @@ int main(int, char **)
     // io.Fonts->AddFontDefault();
 
     // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-    bold = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Black.ttf", height * 0.05);
+    bold = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Black.ttf", height * 0.1);
     IM_ASSERT(bold != NULL);
 
-    font = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Medium.ttf", height * 0.03);
+    font = io.Fonts->AddFontFromFileTTF("/fonts/Roboto-Medium.ttf", height * 0.06);
     IM_ASSERT(font != NULL);
 
     emscripten_set_main_loop_arg(main_loop, NULL, 0, true);
